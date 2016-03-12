@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">#CD2213</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#FFFFFF</item>
+
+        <item name="colorAccent">#CD2213</item>
+        <item name="colorControlHighlight">#d62132</item>
+        <item name="colorPrimaryDark">#9b3740</item>
+    </style>
+
+</resources>
