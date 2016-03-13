@@ -59,20 +59,20 @@ public class ResultDetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_detail);
 
-        imageRepository=null;
+        imageRepository = null;
 
-        Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ResultsListItem item = getIntent().getExtras().getParcelable(EXTRA_RESULT);
 
-        TextView description = (TextView) findViewById( R.id.description );
-        TextView name = (TextView) findViewById( R.id.name );
-        TextView address = (TextView) findViewById( R.id.address );
-        TextView purpose = (TextView) findViewById( R.id.purpose );
-        TextView price = (TextView) findViewById( R.id.price );
-        TextView type = (TextView) findViewById( R.id.type );
+        TextView description = (TextView) findViewById(R.id.description);
+        TextView name = (TextView) findViewById(R.id.name);
+        TextView address = (TextView) findViewById(R.id.address);
+        TextView purpose = (TextView) findViewById(R.id.purpose);
+        TextView price = (TextView) findViewById(R.id.price);
+        TextView type = (TextView) findViewById(R.id.type);
         LinearLayout overview_list = (LinearLayout) findViewById(R.id.overview_list);
 
         name.setText(item.getName());
@@ -84,29 +84,28 @@ public class ResultDetailActivity extends ActionBarActivity {
             JSONObject listingJSONDetails = jsonObj.getJSONObject("json_object");
 
             purpose.setText(listingJSONDetails.getString("field_4"));
-            type.setText(listingJSONDetails.getString("field_2") );
-            description.setText( listingJSONDetails.getString("field_8") );
+            type.setText(listingJSONDetails.getString("field_2"));
+            description.setText(listingJSONDetails.getString("field_8"));
 
             // Populate overview
             ArrayList<JSONObject> fields = FieldRepository.getInstance().getByParent("1");
-            for(int i=0; i < fields.size(); i++) {
+            for (int i = 0; i < fields.size(); i++) {
                 JSONObject fieldDetails = fields.get(i);
 
                 String title = fieldDetails.getString("option");
-                String value = listingJSONDetails.getString("field_"+fieldDetails.getString("id"));
+                String value = listingJSONDetails.getString("field_" + fieldDetails.getString("id"));
 
                 String prefix = fieldDetails.getString("prefix");
                 String suffix = fieldDetails.getString("suffix");
 
-                if(prefix.equals("null"))prefix="";
-                if(suffix.equals("null"))suffix="";
+                if (prefix.equals("null")) prefix = "";
+                if (suffix.equals("null")) suffix = "";
 
-                if(!value.isEmpty())
-                {
+                if (!value.isEmpty()) {
                     LinearLayout lv = new LinearLayout(overview_list.getContext());
                     TextView tVtitle = new TextView(lv.getContext());
                     TextView tVvalue = new TextView(lv.getContext());
-                    tVtitle.setText(title+":");
+                    tVtitle.setText(title + ":");
                     tVvalue.setText(prefix + value + suffix);
 
                     lv.setPadding(0, 5, 0, 5);
@@ -114,8 +113,7 @@ public class ResultDetailActivity extends ActionBarActivity {
                     tVtitle.setPadding(20, 10, 20, 10);
                     tVvalue.setPadding(20, 10, 20, 10);
 
-                    if(fieldDetails.getString("type").equals("DROPDOWN"))
-                    {
+                    if (fieldDetails.getString("type").equals("DROPDOWN")) {
                         tVvalue.setBackgroundColor(Color.parseColor("#5CB85C"));
                         tVvalue.setTextColor(Color.parseColor("#FFFFFF"));
                     }
@@ -130,19 +128,18 @@ public class ResultDetailActivity extends ActionBarActivity {
             // Populate indoor amenities
             LinearLayout indoor_amenities_list = (LinearLayout) findViewById(R.id.indoor_amenities_list);
             fields = FieldRepository.getInstance().getByParent("21");
-            for(int i=0; i < fields.size(); i++) {
+            for (int i = 0; i < fields.size(); i++) {
                 JSONObject fieldDetails = fields.get(i);
 
                 String title = fieldDetails.getString("option");
-                String value = listingJSONDetails.getString("field_"+fieldDetails.getString("id"));
+                String value = listingJSONDetails.getString("field_" + fieldDetails.getString("id"));
 
                 String prefix = fieldDetails.getString("prefix");
                 String suffix = fieldDetails.getString("suffix");
-                if(prefix.equals("null"))prefix="";
-                if(suffix.equals("null"))suffix="";
+                if (prefix.equals("null")) prefix = "";
+                if (suffix.equals("null")) suffix = "";
 
-                if(value.equals("true"))
-                {
+                if (value.equals("true")) {
                     Resources res = indoor_amenities_list.getContext().getResources();
 
                     LinearLayout lv = new LinearLayout(indoor_amenities_list.getContext());
@@ -162,7 +159,7 @@ public class ResultDetailActivity extends ActionBarActivity {
                             "drawable",
                             indoor_amenities_list.getContext().getPackageName());
 
-                    if(res_icon != 0) {
+                    if (res_icon != 0) {
                         ImageView iv2 = new ImageView(indoor_amenities_list.getContext());
                         iv2.setBackgroundResource(res_icon);
                         lv.addView(iv2);
@@ -176,19 +173,18 @@ public class ResultDetailActivity extends ActionBarActivity {
             // Populate outdoor amenities
             LinearLayout outdoor_amenities_list = (LinearLayout) findViewById(R.id.outdoor_amenities_list);
             fields = FieldRepository.getInstance().getByParent("52");
-            for(int i=0; i < fields.size(); i++) {
+            for (int i = 0; i < fields.size(); i++) {
                 JSONObject fieldDetails = fields.get(i);
 
                 String title = fieldDetails.getString("option");
-                String value = listingJSONDetails.getString("field_"+fieldDetails.getString("id"));
+                String value = listingJSONDetails.getString("field_" + fieldDetails.getString("id"));
 
                 String prefix = fieldDetails.getString("prefix");
                 String suffix = fieldDetails.getString("suffix");
-                if(prefix.equals("null"))prefix="";
-                if(suffix.equals("null"))suffix="";
+                if (prefix.equals("null")) prefix = "";
+                if (suffix.equals("null")) suffix = "";
 
-                if(value.equals("true"))
-                {
+                if (value.equals("true")) {
                     Resources res = outdoor_amenities_list.getContext().getResources();
 
                     LinearLayout lv = new LinearLayout(indoor_amenities_list.getContext());
@@ -208,7 +204,7 @@ public class ResultDetailActivity extends ActionBarActivity {
                             "drawable",
                             outdoor_amenities_list.getContext().getPackageName());
 
-                    if(res_icon != 0) {
+                    if (res_icon != 0) {
                         ImageView iv2 = new ImageView(outdoor_amenities_list.getContext());
                         iv2.setBackgroundResource(res_icon);
                         lv.addView(iv2);
@@ -222,19 +218,18 @@ public class ResultDetailActivity extends ActionBarActivity {
             // Populate distances
             LinearLayout distances_list = (LinearLayout) findViewById(R.id.distances_list);
             fields = FieldRepository.getInstance().getByParent("43");
-            for(int i=0; i < fields.size(); i++) {
+            for (int i = 0; i < fields.size(); i++) {
                 JSONObject fieldDetails = fields.get(i);
 
                 String title = fieldDetails.getString("option");
-                String value = listingJSONDetails.getString("field_"+fieldDetails.getString("id"));
+                String value = listingJSONDetails.getString("field_" + fieldDetails.getString("id"));
 
                 String prefix = fieldDetails.getString("prefix");
                 String suffix = fieldDetails.getString("suffix");
-                if(prefix.equals("null"))prefix="";
-                if(suffix.equals("null"))suffix="";
+                if (prefix.equals("null")) prefix = "";
+                if (suffix.equals("null")) suffix = "";
 
-                if(!value.isEmpty())
-                {
+                if (!value.isEmpty()) {
                     Resources res = distances_list.getContext().getResources();
 
                     LinearLayout lv = new LinearLayout(indoor_amenities_list.getContext());
@@ -244,7 +239,7 @@ public class ResultDetailActivity extends ActionBarActivity {
                             "drawable",
                             distances_list.getContext().getPackageName());
 
-                    if(res_icon != 0) {
+                    if (res_icon != 0) {
                         ImageView iv2 = new ImageView(distances_list.getContext());
                         iv2.setBackgroundResource(res_icon);
                         lv.addView(iv2);
@@ -255,7 +250,7 @@ public class ResultDetailActivity extends ActionBarActivity {
                     lv.addView(tVtitle);
 
                     TextView tVvalue = new TextView(lv.getContext());
-                    tVtitle.setText(title+":");
+                    tVtitle.setText(title + ":");
                     tVvalue.setText(prefix + value + suffix);
                     tVtitle.setPadding(20, 0, 20, 0);
                     lv.addView(tVvalue);
@@ -266,7 +261,7 @@ public class ResultDetailActivity extends ActionBarActivity {
             }
 
             // Populate map
-            MapView gmap = (MapView) findViewById( R.id.location_map);
+            MapView gmap = (MapView) findViewById(R.id.location_map);
             gmap.onCreate(savedInstanceState);
             gmap.onResume();// needed to get the map to display immediately
             //gmap.getMap().getUiSettings().setZoomControlsEnabled(true);
@@ -295,32 +290,30 @@ public class ResultDetailActivity extends ActionBarActivity {
 
 
             // Populate agent details
-            TextView agent_name = (TextView) findViewById( R.id.agent_name );
-            TextView agent_phone = (TextView) findViewById( R.id.agent_phone );
-            TextView agent_mail = (TextView) findViewById( R.id.agent_mail );
+            TextView agent_name = (TextView) findViewById(R.id.agent_name);
+            TextView agent_phone = (TextView) findViewById(R.id.agent_phone);
+            TextView agent_mail = (TextView) findViewById(R.id.agent_mail);
 
-            if(!jsonObj.has("name_surname") || jsonObj.getString("name_surname").equals("null") || jsonObj.getString("name_surname").isEmpty())
-            {
-                TextView agent_details_title = (TextView) findViewById( R.id.agent_details_title );
-                LinearLayout agent_details_layout = (LinearLayout) findViewById( R.id.agent_details_layout );
+            if (!jsonObj.has("name_surname") || jsonObj.getString("name_surname").equals("null") || jsonObj.getString("name_surname").isEmpty()) {
+                TextView agent_details_title = (TextView) findViewById(R.id.agent_details_title);
+                LinearLayout agent_details_layout = (LinearLayout) findViewById(R.id.agent_details_layout);
                 agent_details_title.setVisibility(View.GONE);
                 agent_details_layout.setVisibility(View.GONE);
-            }
-            else
-            {
+            } else {
                 agent_name.setText(jsonObj.getString("name_surname"));
                 agent_phone.setText(jsonObj.getString("phone"));
                 agent_mail.setText(jsonObj.getString("mail"));
 
-                String agent_image_url = getString(R.string.files_url )+ jsonObj.getString("image_user_filename");
+                String agent_image_url = getString(R.string.files_url) + jsonObj.getString("image_user_filename");
                 agent_image_url = StringHelper.escapeURLPathParam(agent_image_url);
 
-                final ImageView agent_image = (ImageView) findViewById( R.id.agent_image );
-                Picasso.with( this ).load( agent_image_url ).into(agent_image, new Callback() {
+                final ImageView agent_image = (ImageView) findViewById(R.id.agent_image);
+                Picasso.with(this).load(agent_image_url).into(agent_image, new Callback() {
                     @Override
                     public void onSuccess() {
                         agent_image.setVisibility(View.VISIBLE);
                     }
+
                     @Override
                     public void onError() {
                         //agent_image.setImageResource(R.drawable.no_image);
@@ -350,8 +343,17 @@ public class ResultDetailActivity extends ActionBarActivity {
                 }
             });
 
-            if(!getString(R.string.website_enabled).equalsIgnoreCase("true"))
-            {
+            Button payLink = (Button) findViewById(R.id.pay_link);
+
+            payLink.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(ResultDetailActivity.this, PaymentFormActivity.class);
+                    intent.putExtra("Amount",  R.id.price);
+                    startActivity(intent);
+                }
+            });
+
+            if (!getString(R.string.website_enabled).equalsIgnoreCase("true")) {
                 button.setVisibility(View.GONE);
             }
 
@@ -364,12 +366,9 @@ public class ResultDetailActivity extends ActionBarActivity {
         ImageFragmentPagerAdapter imageFragmentPagerAdapter = new ImageFragmentPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
-        if(imageRepository == null)
-        {
+        if (imageRepository == null) {
             viewPager.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
             display.getSize(size);
@@ -377,7 +376,7 @@ public class ResultDetailActivity extends ActionBarActivity {
             int height = size.y;
 
             ViewGroup.LayoutParams params = viewPager.getLayoutParams();
-            params.height = height/3;
+            params.height = height / 3;
             viewPager.setLayoutParams(params);
 
             viewPager.setAdapter(imageFragmentPagerAdapter);

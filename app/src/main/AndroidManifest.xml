@@ -54,6 +54,14 @@
                 android:value="com.iwinter.ppoint.activities.AdvancedListingActivity" />
         </activity>
 
+        <activity android:name="com.iwinter.ppoint.activities.PaymentFormActivity"
+            android:parentActivityName="com.iwinter.ppoint.activities.PaymentFormActivity">
+
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.iwinter.ppoint.activities.PaymentFormActivity" />
+
+        </activity>
+
     </application>
 
 </manifest>

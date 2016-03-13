@@ -57,8 +57,8 @@
                 android:layout_height="wrap_content">
                 <android.support.v4.view.ViewPager
                     android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1">>
                 </android.support.v4.view.ViewPager>
 
@@ -237,20 +237,7 @@
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/location_map"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:uber="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:background="#000"
-                android:layout_height="match_parent">
-
-                <com.uber.sdk.android.rides.RequestButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    uber:client_id="clientId"
-                    uber:style="black"/>
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -324,6 +311,14 @@
 
                 </LinearLayout>
             </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="20pt"
+                android:text="Pay"
+                android:clickable="true"
+                android:id="@+id/pay_link"
+                android:background="@color/colorPrimary"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
