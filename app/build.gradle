@@ -5,10 +5,11 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId 'com.iwinter.ppoint'
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 23
         versionName '6.0'
         versionCode 6
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -30,4 +31,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-identity:8.4.0'
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
     compile 'com.stripe:stripe-android:+'
+    compile 'com.uber.sdk:rides-android:0.1.0'
 }
